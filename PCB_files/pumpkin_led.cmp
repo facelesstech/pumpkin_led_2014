@@ -1,0 +1,129 @@
+Cmp-Mod V01 Created by Cvpcb (2014-jul-16 BZR unknown)-product   date = Mon 06 Oct 2014 21:49:12 BST
+
+BeginCmp
+TimeStamp = /542AF3CB;
+Reference = 0.1uf1;
+ValeurCmp = C;
+IdModule  = pumpkin:cap_2.54x4.20;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF5F6;
+Reference = 16mhz1;
+ValeurCmp = CRYSTAL;
+IdModule  = pumpkin:horizontal_crystal_10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF4E4;
+Reference = 22pf1;
+ValeurCmp = C;
+IdModule  = Capacitors_ThroughHole.pretty:Capacitor3MMDiscRM2.5;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF487;
+Reference = 22pf2;
+ValeurCmp = C;
+IdModule  = Capacitors_ThroughHole.pretty:Capacitor3MMDiscRM2.5;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF7BC;
+Reference = 220ohm1;
+ValeurCmp = R;
+IdModule  = pumpkin:resistor_8mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF789;
+Reference = 220ohm2;
+ValeurCmp = R;
+IdModule  = pumpkin:resistor_8mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF7EF;
+Reference = 220ohm3;
+ValeurCmp = R;
+IdModule  = pumpkin:resistor_8mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF814;
+Reference = 220ohm4;
+ValeurCmp = R;
+IdModule  = pumpkin:resistor_8mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /542B11D1;
+Reference = BT1;
+ValeurCmp = BATTERY;
+IdModule  = pumpkin:Battery_AA;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF6AC;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = pumpkin:LED_5MM_basic;
+EndCmp
+
+BeginCmp
+TimeStamp = /542B0033;
+Reference = D2;
+ValeurCmp = RGB_LED;
+IdModule  = pumpkin:LED_RGB_Basic;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF705;
+Reference = D3;
+ValeurCmp = LED;
+IdModule  = pumpkin:LED_5MM_basic;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF655;
+Reference = D4;
+ValeurCmp = LED;
+IdModule  = pumpkin:LED_5MM_basic;
+EndCmp
+
+BeginCmp
+TimeStamp = /5430106F;
+Reference = FTDI1;
+ValeurCmp = FTDI;
+IdModule  = pumpkin:FTDI_Header;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF1D5;
+Reference = IC1;
+ValeurCmp = ATMEGA328-P;
+IdModule  = pumpkin:DIP-28_Socket;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF73A;
+Reference = R1;
+ValeurCmp = 220ohm;
+IdModule  = pumpkin:resistor_8mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /542AF851;
+Reference = R2;
+ValeurCmp = 220ohm;
+IdModule  = pumpkin:resistor_8mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /542DB3DD;
+Reference = SW2;
+ValeurCmp = SW_PUSH;
+IdModule  = pumpkin:Push_button_single;
+EndCmp
+
+EndListe
