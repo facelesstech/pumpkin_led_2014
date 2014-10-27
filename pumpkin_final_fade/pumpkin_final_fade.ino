@@ -1,6 +1,10 @@
-int whiteLed1 = 5;
-int whiteLed2 = 6;
-int candleLed = 14;
+/* The RGB fade code was borrowed from this great website
+http://www.techhelpblog.com/2013/10/22/arduino-code-smooth-fading-rgb-leds-pwm/
+*/
+
+int whiteLed1 = 5;  // white led pin 5
+int whiteLed2 = 6;  // white led pin 6
+int candleLed = 14;  // Candle led pin 14
 
 // RGB LED
 String led_colour;
@@ -9,16 +13,16 @@ int GRN_PIN = 10; // Green led set to pin 10
 int BLU_PIN = 9; // Blue led set to pin 9
 #define COMMON_ANODE
 
-// Fade code
+// ------ Fade code start ------
 byte RED, GREEN, BLUE; 
 byte RED_A = 0;
 byte GREEN_A = 0; 
 byte BLUE_A = 0;
 int led_delay = 0;
-byte colour_count = 1;                //Count the colours out
-#define colour_count_max 7              //Set this to the max number of colours defined
-#define colour_delay 4000             //Define the delay between changing colours in ms
-#define time_at_colour 500           //Time to stay on a colour in ms
+byte colour_count = 1;  //Count the colours out
+#define colour_count_max 7  //Set this to the max number of colours defined
+#define colour_delay 4000  //Define the delay between changing colours in ms
+#define time_at_colour 500  //Time to stay on a colour in ms
 
 //Some Time values
 unsigned long TIME_LED = 0;
@@ -54,35 +58,36 @@ unsigned long TIME_COLOUR = 0;
 #define C7_G 250
 #define C7_B 0
 
-// buttons stuff?
+// ------ Fade code end ------
+
+// buttons code
 const int button1 = 12;
 int buttonPushCounter1 = 1;    // counts the button pushes
 int buttonState1 = 0;    // tracks the button state
 int lastButtonState1 = 0;    // last state of the button
 
-// debounce stuff
-int buttonState;             // the current reading from the input pin
+// debounce code
+int buttonState;  // the current reading from the input pin
 int lastButtonState = LOW;
 long lastDebounceTime = 0;  // the last time the output pin was toggled
-long debounceDelay = 50;    // the debounce time; increase if the output flickers
+long debounceDelay = 50;  // the debounce time; increase if the output flickers
 
 
 int brightness = 0;    // how bright the LED is
 int fadeAmount = 5;    // how many points to fade the LED by
+long waitUntilpulse1 = 0;  // Millis wait times
+long waitUntilpulse2 = 20;  // Millis wait times
 
-long waitUntilpulse1 = 0;
-long waitUntilpulse2 = 20;
+long waitUntilpolice1 = 0;  // Millis wait times
+long waitUntilpolice2 = 200;  // Millis wait times
 
-long waitUntilpolice1 = 0;
-long waitUntilpolice2 = 200;
-
-long waitUntilstrobe1 = 0;
-long waitUntilstrobe2 = 20;
+long waitUntilstrobe1 = 0;  // Millis wait times
+long waitUntilstrobe2 = 20;  // Millis wait times
 
 void setup() {
-  pinMode(whiteLed1, OUTPUT);
-  pinMode(whiteLed2, OUTPUT);
-  pinMode(candleLed, OUTPUT);
+  pinMode(whiteLed1, OUTPUT);  // Set LED as output
+  pinMode(whiteLed2, OUTPUT);  // Set LED as output
+  pinMode(candleLed, OUTPUT);  // Set LED as output
   
   //Assign initial values
   RED = C1_R;
@@ -95,14 +100,15 @@ void setup() {
   pinMode(GRN_PIN, OUTPUT); // Set green led pin to output
   pinMode(BLU_PIN, OUTPUT); // Set blue led pin to output
   
-  pinMode(button1, INPUT);
-  digitalWrite(button1, HIGH);
+  pinMode(button1, INPUT);  // Set button input
+  digitalWrite(button1, HIGH);  // Set internal pull up resistor
   
-  Serial.begin(9600);
+  Serial.begin(9600);  // Start serial
 }
 
 void loop() {
-// Start of button code
+  
+// ------Start of button code ------
   int reading = digitalRead(button1);
   buttonState1 = digitalRead(button1);
 
@@ -119,31 +125,25 @@ void loop() {
           
           if (buttonState1 == LOW) {
             buttonPushCounter1++;
-            digitalWrite(candleLed, LOW);
+            digitalWrite(candleLed, LOW); // Turn LED off
             setColor(0, 0, 0);  // off
-            analogWrite(whiteLed1, LOW);
-            analogWrite(whiteLed2, LOW);
-            //Serial.println("pressed");
+            analogWrite(whiteLed1, LOW); // Turn LED off
+            analogWrite(whiteLed2, LOW); // Turn LED off
             
             if (buttonPushCounter1 == 14) {
               buttonPushCounter1 = 1;}
-            /*Serial.println("on");
-            Serial.print("number of button pushes:  ");
-            Serial.println(buttonPushCounter1, DEC);*/
           }
           else {
-            //Serial.println("off"); 
           }
         }
           lastButtonState1 = buttonState1;
     }
   }
   lastButtonState = reading;
-// End of button code
+// ------ End of button code ------
 
   if(buttonPushCounter1 == 1) {
     setColor(255, 255, 0);  // yellow
-    
   }
   
   if(buttonPushCounter1 == 2) {
@@ -171,6 +171,7 @@ void loop() {
   }
   
   if(buttonPushCounter1 == 8) {
+    // Police flashing mode
     if (millis() >= waitUntilpolice1) {
       setColor(255, 0, 0);  // red
       waitUntilpolice1 += 400;
@@ -182,6 +183,7 @@ void loop() {
   }
   
   if(buttonPushCounter1 == 9) {
+    // RGB Colour fade mode
     if(millis() - TIME_LED >= led_delay){
     TIME_LED = millis();
 
@@ -199,6 +201,7 @@ void loop() {
 }
 
   if(buttonPushCounter1 == 10) {
+    // Pulsing white LED mode
     if (millis() >= waitUntilpulse1) {
       analogWrite(whiteLed1, brightness);
       analogWrite(whiteLed2, brightness);
@@ -234,11 +237,13 @@ void loop() {
   }
   
   if(buttonPushCounter1 == 12) {
+    // Candle mode
     digitalWrite(candleLed, HIGH);
   }
   
   
   if(buttonPushCounter1 == 13) {
+    // Off mode
     digitalWrite(candleLed, LOW);
     setColor(0, 0, 0);  // off
     analogWrite(whiteLed1, LOW);
@@ -261,7 +266,6 @@ void setColor(int red, int green, int blue)
 
 void LED()
 {
-
   //Check Values and adjust "Active" Value
   if(RED != RED_A){
     if(RED_A > RED) RED_A = RED_A - 1;
@@ -285,7 +289,6 @@ void LED()
 
 void COLOUR()
 {
-
   //Increment the colour by one or go back to 1 if maxed out
   if(colour_count < colour_count_max) colour_count++;
   else colour_count = 1;
